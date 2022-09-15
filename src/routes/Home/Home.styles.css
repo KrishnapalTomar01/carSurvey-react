@@ -7,7 +7,7 @@
     padding: 225px 0;
     font-size: 30px;
     text-align: center;
-    background-color: bisque;
+    background-color: rgb(232, 198, 157) !important;
     cursor: pointer;
     align-items: center;
     flex: 1;

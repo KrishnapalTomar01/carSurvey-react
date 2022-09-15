@@ -1,7 +1,7 @@
 import './Home.styles.css';
 import { useNavigate } from 'react-router-dom';
 
-export const Home = () => {
+const Home = () => {
     const navigate = useNavigate();
     const surveyClickHandler = () => {
         navigate('survey');
@@ -18,3 +18,5 @@ export const Home = () => {
         </div>
     )
 }
+
+export default Home;
