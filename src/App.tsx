@@ -1,8 +1,8 @@
 import './App.css';
 import { Routes, Route } from "react-router-dom";
-import { Home } from './Home/Home.component';
-import { SurveyPage } from './Survey/Survey.component';
-import { StatisticsPage } from './Statistics/Statistics.component';
+import { Home } from './routes/Home/Home.component';
+import { SurveyPage } from './routes/Survey/Survey.component';
+import { StatisticsPage } from './routes/Statistics/Statistics.component';
 
 function App() {
   return (
