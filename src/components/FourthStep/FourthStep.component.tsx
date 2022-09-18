@@ -1,7 +1,7 @@
 import { stepType } from '../../Models/models';
 import { useNavigate } from 'react-router-dom';
 
-const FourthStep = ({ pageNum, setPageNum }: stepType) => {
+const FourthStep = ({ pageNum, setPageNum, formData }: stepType) => {
     const navigate = useNavigate();
     const handleSubmit = () => {
         navigate('/endsurvey');

@@ -12,3 +12,11 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+.error {
+  color: red;
+}
+
+form {
+  width: 400px;
+}
