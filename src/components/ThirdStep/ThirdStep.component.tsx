@@ -1,9 +1,10 @@
-import { IUserResponse, UserRespondentType } from '../../Models/models';
+import { IUserResponse, UserRespondentType, USER_RESPONSES } from '../../Models/models';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import BooleanInput from '../BooleanInput/BooleanInput.component';
 import { useContext } from 'react';
 import { SurveyContext, surveyContextType } from '../../contexts/surveyForm.context';
+import { setItemInLocalStorageArray } from '../../utils/localstorage.utils';
 
 const ThirdStep = () => {
     const {pageNum, setPageNum, formData, setFormData} = useContext(SurveyContext) as surveyContextType;
@@ -12,11 +13,13 @@ const ThirdStep = () => {
     const { handleSubmit, control,formState: { errors } } = useForm<IUserResponse>();
 
     const submitClickHandler = (data: IUserResponse) => {
-        setFormData({
+        const updatedFormData = {
             ...formData,
             isFirstCar : data.isFirstCar
-        });
+        };
+        setFormData(updatedFormData);
         if(data.isFirstCar === true) {
+            setItemInLocalStorageArray<IUserResponse>(USER_RESPONSES, updatedFormData);
             navigate("/endsurvey",{ state: { userType: UserRespondentType.FirstTimers } });
             return;
         }

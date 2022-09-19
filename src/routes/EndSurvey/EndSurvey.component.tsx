@@ -1,20 +1,13 @@
 import { UserRespondentType } from "../../Models/models";
-import { useContext } from "react";
-import { SurveyContext, surveyContextType } from "../../contexts/surveyForm.context";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './EndSurvey.styles.css';
 
 const EndSurveyPage = () => {
-    const {formData} = useContext(SurveyContext) as surveyContextType;
     const location = useLocation();
-    if(location && location.state){
-        console.log(location.state.userType);
-        //TODO Store formData in localstorage
-    }
-    console.log(formData);
+
     const conditionalMessage = () => {
         if(location && location.state) {
             switch (location.state.userType) {
@@ -38,7 +31,7 @@ const EndSurveyPage = () => {
                     {conditionalMessage()}
                 </Col>
             </Row>
-            <div className="mt-3 fs-5">Go to <a href="/">Home</a> page </div>
+            <div className="mt-3 fs-5">Go to <Link to="/">Home</Link> page </div>
         </Container>
     )
 }

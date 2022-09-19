@@ -2,8 +2,9 @@ import { useNavigate } from 'react-router-dom';
 import { useContext, useEffect } from 'react';
 import { useForm, useFieldArray, ValidateResult } from 'react-hook-form';
 import { SurveyContext, surveyContextType } from '../../contexts/surveyForm.context';
-import { IUserResponse, UserRespondentType } from '../../Models/models';
+import { IUserResponse, UserRespondentType, USER_RESPONSES } from '../../Models/models';
 import BooleanInput from '../BooleanInput/BooleanInput.component';
+import { setItemInLocalStorageArray } from '../../utils/localstorage.utils';
 
 const FourthStep = () => {
     const { formData, setFormData } = useContext(SurveyContext) as surveyContextType;
@@ -39,12 +40,14 @@ const FourthStep = () => {
     }, [numberOfCars, append, remove, fields.length]);
 
     const submitClickHandler = (data: IUserResponse) => {
-        setFormData({...formData, 
+        const updatedFormData = {...formData, 
             driveTrainType: data.driveTrainType,
             isWorriedForEmissions: data.isWorriedForEmissions,
             numberOfCars: data.numberOfCars,
             carTypes: data.carTypes
-        });
+        };
+        setFormData(updatedFormData);
+        setItemInLocalStorageArray<IUserResponse>(USER_RESPONSES, updatedFormData);
         navigate('/endsurvey', { state: { userType: UserRespondentType.Targetables } });
     }
     return (

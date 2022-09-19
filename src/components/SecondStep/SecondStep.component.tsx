@@ -1,9 +1,10 @@
-import { IUserResponse, UserRespondentType } from '../../Models/models';
+import { IUserResponse, UserRespondentType, USER_RESPONSES } from '../../Models/models';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import BooleanInput from '../BooleanInput/BooleanInput.component';
 import { useContext } from 'react';
 import { SurveyContext, surveyContextType } from '../../contexts/surveyForm.context';
+import { setItemInLocalStorageArray } from '../../utils/localstorage.utils';
 
 const SecondStep = () => {
     const {pageNum, setPageNum, formData, setFormData} = useContext(SurveyContext) as surveyContextType;
@@ -11,11 +12,13 @@ const SecondStep = () => {
     const { handleSubmit, control,formState: { errors } } = useForm<IUserResponse>();
 
     const submitClickHandler = (data: IUserResponse) => {
-        setFormData({
+        const updatedFormData = {
             ...formData,
             hasCarLicense : data.hasCarLicense
-        });
+        };
+        setFormData(updatedFormData);
         if(data.hasCarLicense === false) {
+            setItemInLocalStorageArray<IUserResponse>(USER_RESPONSES, updatedFormData);
             navigate("/endsurvey",{ state: { userType: UserRespondentType.Unlicensed } });
             return;
         }

@@ -34,7 +34,7 @@ const SurveyPage = () => {
     return (
         <Container className='survey-container'>
             <Row>
-                <h2>Survey Form</h2>
+                <h2>Automotive Sales Customer Survey</h2>
             </Row>
             <Row>
                 <Col>

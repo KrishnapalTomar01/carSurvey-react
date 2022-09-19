@@ -1,8 +1,9 @@
-import { IUserResponse, UserRespondentType } from '../../Models/models';
+import { IUserResponse, UserRespondentType, USER_RESPONSES } from '../../Models/models';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { SurveyContext, surveyContextType } from '../../contexts/surveyForm.context';
+import { setItemInLocalStorageArray } from '../../utils/localstorage.utils';
 
 const FirstStep = () => {
     const {pageNum, setPageNum, formData, setFormData} = useContext(SurveyContext) as surveyContextType;
@@ -10,10 +11,13 @@ const FirstStep = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<IUserResponse>();
 
     const submitClickHandler = (data: IUserResponse) => {
-        setFormData({...formData, 
+        const updatedFormData = {...formData, 
             age: data.age, 
-            gender: data.gender});
+            gender: data.gender};
+        setFormData(updatedFormData);
+        
         if(data.age < 18) {
+            setItemInLocalStorageArray<IUserResponse>(USER_RESPONSES, updatedFormData);
             navigate("/endsurvey",{ state: { userType: UserRespondentType.Adolescents } });
             return;
         }
@@ -42,7 +46,7 @@ const FirstStep = () => {
                     </select>
                 </div>
                 {errors.gender && <p className='error'>Select Gender</p>}
-                
+
                 <div>
                     <button className="btn btn-primary mt-3" type='submit'>Next</button>
                 </div>

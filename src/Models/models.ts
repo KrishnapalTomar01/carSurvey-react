@@ -4,6 +4,8 @@ export enum GenderOptions {
     Other = "Other"
 }
 
+export const USER_RESPONSES = "USER_RESPONSES";
+
 export enum DriveTrain {
     FWD = "FWD",
     RWD = "RWD",
