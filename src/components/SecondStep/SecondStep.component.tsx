@@ -1,9 +1,12 @@
-import { stepType, IUserResponse } from '../../Models/models';
+import { IUserResponse, UserRespondentType } from '../../Models/models';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import BooleanInput from '../BooleanInput/BooleanInput.component';
+import { useContext } from 'react';
+import { SurveyContext, surveyContextType } from '../../contexts/surveyForm.context';
 
-const SecondStep = ({ pageNum, setPageNum, formData, setFormData }: stepType) => {
+const SecondStep = () => {
+    const {pageNum, setPageNum, formData, setFormData} = useContext(SurveyContext) as surveyContextType;
     const navigate = useNavigate();
     const { handleSubmit, control,formState: { errors } } = useForm<IUserResponse>();
 
@@ -13,8 +16,7 @@ const SecondStep = ({ pageNum, setPageNum, formData, setFormData }: stepType) =>
             hasCarLicense : data.hasCarLicense
         });
         if(data.hasCarLicense === false) {
-            console.log(formData);
-            navigate("/endsurvey");
+            navigate("/endsurvey",{ state: { userType: UserRespondentType.Unlicensed } });
             return;
         }
         // Show bonus question page for age group 18-25 only

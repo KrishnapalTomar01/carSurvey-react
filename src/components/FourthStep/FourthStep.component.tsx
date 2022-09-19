@@ -1,10 +1,13 @@
-import { stepType } from '../../Models/models';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { SurveyContext, surveyContextType } from '../../contexts/surveyForm.context';
+import { UserRespondentType } from '../../Models/models';
 
-const FourthStep = ({ pageNum, setPageNum, formData }: stepType) => {
+const FourthStep = () => {
+    const {pageNum, setPageNum, formData, setFormData} = useContext(SurveyContext) as surveyContextType;
     const navigate = useNavigate();
     const handleSubmit = () => {
-        navigate('/endsurvey');
+        navigate('/endsurvey',{ state: { userType: UserRespondentType.Targetables } });
     }
     return (
         <div>

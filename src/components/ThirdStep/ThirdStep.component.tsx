@@ -1,9 +1,13 @@
-import { stepType, IUserResponse } from '../../Models/models';
+import { IUserResponse, UserRespondentType } from '../../Models/models';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import BooleanInput from '../BooleanInput/BooleanInput.component';
+import { useContext } from 'react';
+import { SurveyContext, surveyContextType } from '../../contexts/surveyForm.context';
 
-const ThirdStep = ({ pageNum, setPageNum, formData, setFormData }: stepType) => {
+const ThirdStep = () => {
+    const {pageNum, setPageNum, formData, setFormData} = useContext(SurveyContext) as surveyContextType;
+    
     const navigate = useNavigate();
     const { handleSubmit, control,formState: { errors } } = useForm<IUserResponse>();
 
@@ -13,7 +17,7 @@ const ThirdStep = ({ pageNum, setPageNum, formData, setFormData }: stepType) => 
             isFirstCar : data.isFirstCar
         });
         if(data.isFirstCar === true) {
-            navigate("/endsurvey");
+            navigate("/endsurvey",{ state: { userType: UserRespondentType.FirstTimers } });
             return;
         }
         setPageNum(pageNum + 1);

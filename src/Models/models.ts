@@ -1,10 +1,3 @@
-export type stepType = {
-    pageNum : number,
-    setPageNum: React.Dispatch<React.SetStateAction<number>>,
-    formData: IUserResponse,
-    setFormData: React.Dispatch<React.SetStateAction<IUserResponse>>
-}
-
 export enum GenderOptions {
     M = "M",
     F = "F",

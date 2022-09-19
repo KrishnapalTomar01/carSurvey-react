@@ -1,8 +1,11 @@
-import { stepType, IUserResponse } from '../../Models/models';
+import { IUserResponse, UserRespondentType } from '../../Models/models';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { SurveyContext, surveyContextType } from '../../contexts/surveyForm.context';
 
-const FirstStep = ({ pageNum, setPageNum, formData, setFormData }: stepType) => {
+const FirstStep = () => {
+    const {pageNum, setPageNum, formData, setFormData} = useContext(SurveyContext) as surveyContextType;
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm<IUserResponse>();
 
@@ -11,7 +14,7 @@ const FirstStep = ({ pageNum, setPageNum, formData, setFormData }: stepType) => 
             age: data.age, 
             gender: data.gender});
         if(data.age < 18) {
-            navigate("/endsurvey");
+            navigate("/endsurvey",{ state: { userType: UserRespondentType.Adolescents } });
             return;
         }
         setPageNum(pageNum + 1);
