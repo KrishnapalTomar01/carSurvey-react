@@ -22,14 +22,16 @@ const FirstStep = () => {
     return (
         <div>
             <form onSubmit={handleSubmit(submitClickHandler)}>
-                <div className="form-group">
+
+                <div className="form-group col-6">
                     <label>Age</label>
                     <input type="number" className="form-control"
                     {...register("age", { required: true, max: 100, min:1 })}
                     />
                 </div>
                 {errors.age && <p className='error'>Age must be between 1 to 100</p>}
-                <div className="form-group mt-3">
+
+                <div className="form-group mt-3 col-6">
                     <label>Gender</label>
                     <select className="form-control" {...register("gender", {
                        required: true
@@ -40,6 +42,7 @@ const FirstStep = () => {
                     </select>
                 </div>
                 {errors.gender && <p className='error'>Select Gender</p>}
+                
                 <div>
                     <button className="btn btn-primary mt-3" type='submit'>Next</button>
                 </div>
