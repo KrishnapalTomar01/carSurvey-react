@@ -23,7 +23,6 @@ const BooleanInput = ({ control, name, trueText, falseText } : booleanParameterT
                 onBlur={onBlur} // notify when input is touched
                 onChange={() => onChange(true)} // send value to hook form
                 checked={value === true}
-                // inputRef={ref}
               />
               {trueText}
             </label>
@@ -34,7 +33,6 @@ const BooleanInput = ({ control, name, trueText, falseText } : booleanParameterT
                 onBlur={onBlur} // notify when input is touched
                 onChange={() => onChange(false)} // send value to hook form
                 checked={value === false}
-                // inputRef={ref}
               />
               {falseText}
             </label>
