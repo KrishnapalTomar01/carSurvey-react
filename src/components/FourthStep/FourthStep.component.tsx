@@ -6,6 +6,7 @@ import { IUserResponse, UserRespondentType, USER_RESPONSES } from '../../Models/
 import BooleanInput from '../BooleanInput/BooleanInput.component';
 import { setItemInLocalStorageArray } from '../../utils/localstorage.utils';
 
+const carMakeValues = ['Volkswagen', 'BMW', 'Mercedes', 'Hyundai'];
 const FourthStep = () => {
     const { formData, setFormData } = useContext(SurveyContext) as surveyContextType;
     const { register, handleSubmit, control, formState: { errors }, watch, getValues } = useForm<IUserResponse>();
@@ -93,7 +94,7 @@ const FourthStep = () => {
                                 <div className="form-group col-6">
                                     <label className='me-2'>Car Make</label>
                                     <select className='form-control' {...register(`carTypes.${i}.carMake`, {required : true})}>
-                                        {['Volkswagen','BMW','Mercedes','Hyundai'].map(i =>
+                                        {carMakeValues.map(i =>
                                                 <option key={i} value={i}>{i}</option>
                                         )}
                                     </select>
